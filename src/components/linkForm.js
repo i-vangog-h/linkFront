@@ -1,31 +1,27 @@
 import React, { useState } from 'react';
+import { generateShortLink } from '../services/api';
 
 const LinkForm = () => {
   const [url, setUrl] = useState('');
-  const [shortenedUrl, setShortenedUrl] = useState('');
-  const baseUrl = "https://localhost:5011/api";
-  const postEndpoint = "/generate";
+  const [hash, setHash] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch( baseUrl + postEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(url),
-      });
-      const data = await response.json();
-      setShortenedUrl(data.shortenedUrl);
-      console.log(shortenedUrl ?? "not yet set");
-    } catch (error) {
-      console.error('Error:', error);
+    if (url){ // is not null
+      try{
+        const response = await generateShortLink( url )
+        setHash(response.hash);
+        console.log(hash);
+        setUrl('');
+      }
+      catch (error){
+        console.error("Error creating shortened link: ", error);
+      }
     }
   };
 
   return (
-    <div>
+    <div className='formContainer'>
       <form onSubmit={handleSubmit}>
         <input
           type="url"
@@ -36,12 +32,9 @@ const LinkForm = () => {
         />
         <button type="submit">Shorten</button>
       </form>
-      {shortenedUrl && (
+      {hash && ( //if hash is not null then display
         <div>
-          <p>Shortened URL:</p>
-          <a href={shortenedUrl} target="_blank" rel="noopener noreferrer">
-            {shortenedUrl}
-          </a>
+          <p>Hash: {hash}</p>
         </div>
       )}
     </div>

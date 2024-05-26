@@ -13,6 +13,14 @@
   color: white;
 }
 
+.shortLinkDisplay {
+  display: flex;
+  flex-direction: row;
+}
+
+.shortLinkDisplay a {
+  padding-left: 6px;
+}
 
 form {
   display: flex;

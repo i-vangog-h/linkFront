@@ -3,20 +3,35 @@ import { generateShortLink } from '../services/api';
 
 const LinkForm = () => {
   const [url, setUrl] = useState('');
-  const [hash, setHash] = useState('');
+  const [shortenedUrl, setShortenedUrl] = useState('');
+  const [errrorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (url){ // is not null
       try{
         const response = await generateShortLink( url )
-        setHash(response.hash);
-        console.log(hash);
-        setUrl('');
+        setErrorMessage('');
+        setShortenedUrl(response.shortUrl);
+        console.log(shortenedUrl);
       }
       catch (error){
         console.error("Error creating shortened link: ", error);
+        if(error.response){
+          setErrorMessage(error.response.data);
+        }
+        else{
+          setErrorMessage(error.message);
+        }
       }
+    }
+  };
+
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
     }
   };
 
@@ -32,9 +47,15 @@ const LinkForm = () => {
         />
         <button type="submit">Shorten</button>
       </form>
-      {hash && ( //if hash is not null then display
-        <div>
-          <p>Hash: {hash}</p>
+      {errrorMessage && (
+        <div className='errorBlock'>
+          {errrorMessage}
+        </div>
+      )}
+      {shortenedUrl && ( //if shortenedUrl is not null then display
+        <div className='shortLinkDisplay'>
+          <p>Short:</p>
+          <p><a href={shortenedUrl}> {shortenedUrl} </a></p>
         </div>
       )}
     </div>

@@ -11,19 +11,28 @@ export const generateShortLink = async (url) => {
             headers: { 'Content-Type' : 'application/json' }
         }
     ) 
-    .catch((error) => console.error("Error on generate api call: ", error));
-    
+    .catch((error) => { 
+      throw error;
+    });
+
   return response.data;
+
 };
 
-export const getShortLinks = async () => {
+export const getAllLinks = async () => {
   const response = await axios.get(`${API_BASE_URL}/get-all`)
-    .catch((error) => console.error("Error on get all api call: ", error));
+    .catch((error) => { 
+      throw error;
+      });
+  
   return response.data;
 };
 
 export const getActualLink = async (hash) => {
     const response = await axios.get(`${API_BASE_URL}/get-original/${hash}`)
-        .catch((error) => console.error("Error on get original api call: ", error));
+        .catch((error) => {
+          throw error;
+        });
+        
     return response.data;
   };

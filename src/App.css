@@ -1,10 +1,10 @@
 .App {
+  background-color: #282c34;
   text-align: center;
+  min-height: 100vh;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,13 +13,51 @@
   color: white;
 }
 
+.navbar {
+  display: flex;
+  padding: 15px;
+}
+
+.navbar button {
+  padding: 7px;
+  font-weight: 700;
+}
+
 .shortLinkDisplay {
   display: flex;
+  justify-items:last baseline;
   flex-direction: row;
 }
 
-.shortLinkDisplay a {
-  padding-left: 6px;
+.shortLinkDisplay p {
+  margin: 10px;
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+.errorBlock {
+  padding-top: 5px;
+  font-size: large;
+  color: red;
+}
+
+table {
+  text-align: start;
+  font-size: medium;
+  margin: 10px;
+  padding: 20px;
+}
+
+table thead {
+  background-color:blueviolet;
+}
+
+table tbody {
+  background-color: black;
+}
+
+table th, td {
+  padding: 10px;
 }
 
 form {
@@ -42,5 +80,6 @@ button {
 }
 
 a {
-  color: #61dafb;
+  color: white;
 }
+

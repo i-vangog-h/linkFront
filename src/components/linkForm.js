@@ -4,19 +4,25 @@ import { generateShortLink } from '../services/api';
 const LinkForm = () => {
   const [url, setUrl] = useState('');
   const [shortenedUrl, setShortenedUrl] = useState('');
+  const [errrorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (url){ // is not null
       try{
         const response = await generateShortLink( url )
+        setErrorMessage('');
         setShortenedUrl(response.shortUrl);
-        copyToClipboard(response.shortUrl);
         console.log(shortenedUrl);
-        setUrl('');
       }
       catch (error){
         console.error("Error creating shortened link: ", error);
+        if(error.response){
+          setErrorMessage(error.response.data);
+        }
+        else{
+          setErrorMessage(error.message);
+        }
       }
     }
   };
@@ -41,9 +47,14 @@ const LinkForm = () => {
         />
         <button type="submit">Shorten</button>
       </form>
+      {errrorMessage && (
+        <div className='errorBlock'>
+          {errrorMessage}
+        </div>
+      )}
       {shortenedUrl && ( //if shortenedUrl is not null then display
         <div className='shortLinkDisplay'>
-          <p>Short: </p>
+          <p>Short:</p>
           <p><a href={shortenedUrl}> {shortenedUrl} </a></p>
         </div>
       )}

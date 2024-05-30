@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { generateShortLink } from '../services/api';
+import ShortenedDisplay from './shortenedDisplay';
 
-const LinkForm = () => {
+const LinkForm = ({ onAddLink }) => {
   const [url, setUrl] = useState('');
   const [shortenedUrl, setShortenedUrl] = useState('');
   const [errrorMessage, setErrorMessage] = useState('');
@@ -13,10 +14,15 @@ const LinkForm = () => {
         const response = await generateShortLink( url )
         setErrorMessage('');
         setShortenedUrl(response.shortUrl);
+
+        //callback function, adds new link to the list of links on App.js
+        onAddLink(shortenedUrl);
+        
         console.log(shortenedUrl);
       }
       catch (error){
         console.error("Error creating shortened link: ", error);
+        setShortenedUrl('');
         if(error.response){
           setErrorMessage(error.response.data);
         }
@@ -52,12 +58,15 @@ const LinkForm = () => {
           {errrorMessage}
         </div>
       )}
+      
       {shortenedUrl && ( //if shortenedUrl is not null then display
-        <div className='shortLinkDisplay'>
-          <p>Short:</p>
-          <p><a href={shortenedUrl}> {shortenedUrl} </a></p>
-        </div>
+        <ShortenedDisplay 
+          clearClick={() => {setUrl(''); setShortenedUrl('');} } 
+          copyClick={() => copyToClipboard(shortenedUrl)}
+          shortenedUrl={shortenedUrl} 
+        />
       )}
+      
     </div>
   );
 };

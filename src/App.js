@@ -8,16 +8,16 @@ function App() {
   const [links, setLinks] = useState([]);
   const [showLinksList, setShowLinksList] = useState(false);
 
+  const fetchLinks = async () => {
+    try {
+      const linksData = await getAllLinks();
+      setLinks(linksData);
+    } catch (error) {
+      console.error('Error fetching links:', error);
+    }
+  };
+  
   useEffect(() => {
-    const fetchLinks = async () => {
-      try {
-        const linksData = await getAllLinks();
-        setLinks(linksData);
-      } catch (error) {
-        console.error('Error fetching links:', error);
-      }
-    };
-
     fetchLinks();
   }, []);
 
@@ -27,16 +27,19 @@ function App() {
 
   const changeShow = () => {
     setShowLinksList(!showLinksList);
+    if (!showLinksList){
+      fetchLinks();
+    }
   }
 
   return (
     <div className="App">
-      <div className="navbar">
-        <button className="linksListButton" onClick={changeShow}>LIST LINKS</button>
-      </div>
       <header className="App-header">
         <h1>Link Shortener</h1>
-        <LinkForm onAddLink={addLink}/>
+        <div className='main-bar'>
+          <div className='list-bar'> <button className="linksListButton" onClick={changeShow}>List links</button> </div>
+          <LinkForm onAddLink={addLink}/>
+        </div>
         { showLinksList && <LinksList links={links}/>}
       </header>
     </div>

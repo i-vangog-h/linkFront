@@ -13,26 +13,38 @@
   color: white;
 }
 
-.navbar {
+.shortLinkDisplay{
+  font-size: 16px;
   display: flex;
-  padding: 15px;
-}
-
-.navbar button {
-  padding: 7px;
-  font-weight: 700;
-}
-
-.shortLinkDisplay {
-  display: flex;
-  justify-items:last baseline;
   flex-direction: row;
+  align-self: flex-end;
 }
 
-.shortLinkDisplay p {
-  margin: 10px;
-  padding-top: 10px;
-  font-size: 20px;
+.shortLinkDisplay * {
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  border: 0;
+}
+
+.shortLinkDisplay a {
+  padding: 1px 1px;
+}
+
+.shortLinkDisplay button{
+  margin-right: 10px;
+  align-content: center;
+  padding: 1px 25px;
+}
+
+.main-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-bar {
+  align-self: flex-start;
+  margin-left: 10px;
 }
 
 .errorBlock {
@@ -66,6 +78,11 @@ form {
   align-items: center;
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 input {
   margin: 10px;
   padding: 10px;
@@ -74,9 +91,12 @@ input {
 }
 
 button {
-  padding: 10px 20px;
+  padding: 9px 46.175px;
+  font-weight: 800;
+  background: white;
   font-size: 16px;
   cursor: pointer;
+  border: 0;
 }
 
 a {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { generateShortLink } from '../services/api';
-import ShortenedDisplay from './shortenedDisplay';
+import ShortenedDisplay from './ShortenedDisplay';
 
 const LinkForm = ({ onAddLink }) => {
   const [url, setUrl] = useState('');

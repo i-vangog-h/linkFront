@@ -1,5 +1,5 @@
 import React from 'react';
-import LinkItem from './linkItem';
+import LinkItem from './LinkItem';
 
 const LinksList = ({ links }) => {
   return (<>

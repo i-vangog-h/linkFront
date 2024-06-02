@@ -1,12 +1,13 @@
-import './App.css';
+import './styles/App.css';
 import React, {useState, useEffect} from 'react';
-import LinkForm from './components/linkForm';
-import LinksList from './components/linksList';
+import LinkForm from './components/LinkForm';
+import LinksList from './components/LinksList';
 import { getAllLinks } from './services/api';
 
 function App() {
   const [links, setLinks] = useState([]);
   const [showLinksList, setShowLinksList] = useState(false);
+  const [shortUrl, setShortUrl] = useState('');
 
   const fetchLinks = async () => {
     try {
@@ -17,6 +18,7 @@ function App() {
     }
   };
   
+  // fetch links when rendering
   useEffect(() => {
     fetchLinks();
   }, []);
@@ -27,6 +29,7 @@ function App() {
 
   const changeShow = () => {
     setShowLinksList(!showLinksList);
+  
     if (!showLinksList){
       fetchLinks();
     }
@@ -38,7 +41,8 @@ function App() {
         <h1>Link Shortener</h1>
         <div className='main-bar'>
           <div className='list-bar'> <button className="linksListButton" onClick={changeShow}>List links</button> </div>
-          <LinkForm onAddLink={addLink}/>
+          <LinkForm onAddLink={addLink} onSet/>
+          
         </div>
         { showLinksList && <LinksList links={links}/>}
       </header>

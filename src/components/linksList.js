@@ -22,7 +22,7 @@ const LinksList = ({ links }) => {
     </table>)
     } 
 
-    { links.length == 0 && <div className='errorBlock'>
+    { links.length === 0 && <div className='errorBlock'>
         no links were found
     </div>}
 

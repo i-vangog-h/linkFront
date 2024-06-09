@@ -5,4 +5,4 @@ user interface for the Link Shortener service. React JS
 
 git clone this repo </br>
 
-run `npm start`
+run `npm start` to launch development server

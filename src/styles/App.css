@@ -61,11 +61,12 @@ table {
 }
 
 table thead {
-  background-color:blueviolet;
+  background-color: blueviolet;
 }
 
 table tbody {
   background-color: black;
+  opacity: 100%;
 }
 
 table th, td {

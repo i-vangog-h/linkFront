@@ -1,7 +1,8 @@
 import React from 'react';
-import LinkItem from './linkItem';
+import LinkItem from './LinkItem';
 
 const LinksList = ({ links }) => {
+  links.map(link => console.log(link.id));
   return (<>
     { links.length > 0 && (
     <table>
@@ -22,7 +23,7 @@ const LinksList = ({ links }) => {
     </table>)
     } 
 
-    { links.length == 0 && <div className='errorBlock'>
+    { links.length === 0 && <div className='errorBlock'>
         no links were found
     </div>}
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { generateShortLink } from '../services/api';
-import ShortenedDisplay from './shortenedDisplay';
+import ShortenedDisplay from './ShortenedDisplay';
 
 const LinkForm = ({ onAddLink }) => {
   const [url, setUrl] = useState('');
@@ -16,7 +16,7 @@ const LinkForm = ({ onAddLink }) => {
         setShortenedUrl(response.shortUrl);
 
         //callback function, adds new link to the list of links on App.js
-        onAddLink(shortenedUrl);
+        if (shortenedUrl) onAddLink(shortenedUrl);
         
         console.log(shortenedUrl);
       }

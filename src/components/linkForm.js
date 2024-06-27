@@ -16,7 +16,7 @@ const LinkForm = ({ onAddLink }) => {
         setShortenedUrl(response.shortUrl);
 
         //callback function, adds new link to the list of links on App.js
-        onAddLink(shortenedUrl);
+        if (shortenedUrl) onAddLink(shortenedUrl);
         
         console.log(shortenedUrl);
       }

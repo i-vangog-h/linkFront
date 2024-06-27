@@ -7,7 +7,6 @@ import { getAllLinks } from './services/api';
 function App() {
   const [links, setLinks] = useState([]);
   const [showLinksList, setShowLinksList] = useState(false);
-  const [shortUrl, setShortUrl] = useState('');
 
   const fetchLinks = async () => {
     try {
@@ -24,7 +23,9 @@ function App() {
   }, []);
 
   const addLink = (link) => {
-    setLinks([link, ...links]);
+    if (!links.some(l => l.id === link.id)){
+      setLinks([link, ...links])
+    };
   };
 
   const changeShow = () => {
